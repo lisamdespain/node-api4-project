@@ -5,28 +5,29 @@ function getId(){
 }
 
 const initialUsers = () =>([
-    {id: getId(), name: 'Lisa', password: "test"},
-    {id: getId(), name: 'Ian', password: "hotMan"},
-    {id: getId(), name: 'Nicole', password: "smartDaughter"},
-    {id: getId(), name: 'Nathan', password: "smartSon"}
+    {id: getId(), name: 'Lisa', password: "XYZ123"},
+    {id: getId(), name: 'Ian', password: "ABC987"},
+    {id: getId(), name: 'Nicole', password: "XYZ123"},
+    {id: getId(), name: 'Nathan', password: "ABC987"}
 ])
 
 let users = initialUsers;
 
-const find = () =>{
+const find = () => {
     return Promise.resolve(users)
-}
+  }
+  
 
 const insert = ({name, password}) =>{
-const newUser = {id: getId(), name, password}
-users.push(newUser)
-return Promise.resolve(newUser)
+    const newUser = {id: getId(), name, password}
+    users.push(newUser)
+    return Promise.resolve(newUser)
 }
 
 const login = ({ name, password }) => {
-    // SELECT * FROM users WHERE id = 1;
-    const user = users.find(d => d.name === name && d.password === password)
-    if (user){
+    const userName = users.find(d => d.name === name)
+    const userPassword = users.find(p=> p.password == password)
+    if (userName && userPassword){
         return Promise.resolve(user)
     } else{
         return Promise.resolve(null);
